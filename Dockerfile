@@ -14,4 +14,3 @@ USER execuser
 
 # Run the application
 ENTRYPOINT ["./run"]
-CMD ["-port", "8080", "-delay", "2m"]
