@@ -3,37 +3,43 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/NoizeMe/prometheus-covid-exporter/pkg/covid"
-	"github.com/NoizeMe/prometheus-covid-exporter/pkg/utils"
+	"github.com/NoizeMe/prometheus-covid-exporter/covid"
+	"github.com/jtaczanowski/go-scheduler"
 	"github.com/prometheus/client_golang/prometheus"
-	"github.com/prometheus/client_golang/prometheus/promauto"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"net/http"
 	"strings"
 	"time"
 )
 
+const (
+	defaultPort = 8080
+
+	defaultInitialDelay = 0 * time.Second
+	defaultRefreshDelay = 2 * time.Minute
+)
+
 var (
-	diseaseCases = promauto.NewGaugeVec(prometheus.GaugeOpts{
+	diseaseCases = prometheus.NewGaugeVec(prometheus.GaugeOpts{
 		Namespace: "covid",
 		Subsystem: "disease",
 		Name:      "cases",
 		Help:      "The number of cases in Germany",
 	}, []string{"state"})
-	diseaseDeaths = promauto.NewGaugeVec(prometheus.GaugeOpts{
+	diseaseDeaths = prometheus.NewGaugeVec(prometheus.GaugeOpts{
 		Namespace: "covid",
 		Subsystem: "disease",
 		Name:      "deaths",
 		Help:      "The number of deaths in relation with COVID in Germany",
 	}, []string{"state"})
 
-	vaccinationTotal = promauto.NewGaugeVec(prometheus.GaugeOpts{
+	vaccinationTotal = prometheus.NewGaugeVec(prometheus.GaugeOpts{
 		Namespace: "covid",
 		Subsystem: "vaccination",
 		Name:      "total",
 		Help:      "The number of people that need to get vaccinated in total",
 	}, []string{"state"})
-	vaccinationVaccinated = promauto.NewGaugeVec(prometheus.GaugeOpts{
+	vaccinationVaccinated = prometheus.NewGaugeVec(prometheus.GaugeOpts{
 		Namespace: "covid",
 		Subsystem: "vaccination",
 		Name:      "vaccinated",
@@ -74,23 +80,28 @@ func refreshVaccinationData() {
 }
 
 func main() {
-	port := *flag.Uint("port", 8080, "The port at which the exporter should listen on")
+	var (
+		port         uint
+		refreshDelay time.Duration
+	)
+
+	flag.UintVar(&port, "port", defaultPort, "the port at which the exporter should listen on.")
+	flag.DurationVar(&refreshDelay, "delay", defaultRefreshDelay, "the delay between data fetching round trips.")
 	flag.Parse()
 
 	refreshDiseaseData()
-	refreshVaccinationData()
+	scheduler.RunTaskAtInterval(refreshDiseaseData, refreshDelay, defaultInitialDelay)
 
-	refreshJob := utils.CreatePeriodic(2*time.Minute, func() {
-		refreshDiseaseData()
-		refreshVaccinationData()
-	})
-	refreshJob.Start()
+	refreshVaccinationData()
+	scheduler.RunTaskAtInterval(refreshVaccinationData, refreshDelay, defaultInitialDelay)
 
 	registry := prometheus.NewRegistry()
-	registry.MustRegister(diseaseCases)
-	registry.MustRegister(diseaseDeaths)
-	registry.MustRegister(vaccinationTotal)
-	registry.MustRegister(vaccinationVaccinated)
+	registry.MustRegister(
+		diseaseCases,
+		diseaseDeaths,
+		vaccinationTotal,
+		vaccinationVaccinated,
+	)
 
 	http.Handle("/metrics", promhttp.HandlerFor(registry, promhttp.HandlerOpts{}))
 	if err := http.ListenAndServe(fmt.Sprintf(":%d", port), nil); err != nil {
