@@ -52,7 +52,7 @@ func refreshDiseaseData() {
 	for _, data := range governmentData {
 		province := strings.ReplaceAll(data.Province, "\n", "")
 		if province == "Total" {
-			province = "combined"
+			province = "Germany"
 		}
 
 		diseaseCases.WithLabelValues(province).Set(float64(data.Cases))
@@ -66,8 +66,8 @@ func refreshVaccinationData() {
 		panic(err)
 	}
 
-	vaccinationTotal.WithLabelValues("combined").Set(float64(vaccinationData.Total))
-	vaccinationVaccinated.WithLabelValues("combined").Set(float64(vaccinationData.Vaccinated))
+	vaccinationTotal.WithLabelValues("Germany").Set(float64(vaccinationData.Total))
+	vaccinationVaccinated.WithLabelValues("Germany").Set(float64(vaccinationData.Vaccinated))
 
 	for state, data := range vaccinationData.States {
 		vaccinationTotal.WithLabelValues(state).Set(float64(data.Total))
