@@ -13,4 +13,5 @@ RUN adduser -S -D -H -h /app execuser
 USER execuser
 
 # Run the application
-CMD ["./run"]
+ENTRYPOINT ["./run"]
+CMD ["-port", "8080"]

@@ -9,8 +9,6 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promauto"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"net/http"
-	"os"
-	"strconv"
 	"strings"
 	"time"
 )
@@ -76,20 +74,8 @@ func refreshVaccinationData() {
 }
 
 func main() {
-	port := *flag.Uint("port", 0, "The port at which the exporter should listen on")
+	port := *flag.Uint("port", 8080, "The port at which the exporter should listen on")
 	flag.Parse()
-
-	if port == 0 {
-		if envPort, hasEnvPort := os.LookupEnv("COVID_EXPORTER_PORT"); hasEnvPort {
-			if parsedEnvPort, err := strconv.ParseUint(envPort, 10, 32); err != nil {
-				port = uint(parsedEnvPort)
-			}
-		}
-	}
-
-	if port == 0 {
-		port = 8080
-	}
 
 	refreshDiseaseData()
 	refreshVaccinationData()
