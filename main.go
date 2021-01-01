@@ -7,6 +7,7 @@ import (
 	"github.com/jtaczanowski/go-scheduler"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"log"
 	"net/http"
 	"strings"
 	"time"
@@ -88,6 +89,10 @@ func main() {
 	flag.UintVar(&port, "port", defaultPort, "the port at which the exporter should listen on.")
 	flag.DurationVar(&refreshDelay, "delay", defaultRefreshDelay, "the delay between data fetching round trips.")
 	flag.Parse()
+
+	log.Println("Starting prometheus COVID exporter")
+	log.Printf("  - Port: %d\n", port)
+	log.Printf("  - Delay: %s\n", refreshDelay.String())
 
 	refreshDiseaseData()
 	scheduler.RunTaskAtInterval(refreshDiseaseData, refreshDelay, defaultInitialDelay)
