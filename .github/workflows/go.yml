@@ -1,0 +1,26 @@
+name: Go
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Set up Go 1.x
+      uses: actions/setup-go@v2
+      with:
+        go-version: ^1.15
+
+    - name: Check out code into the Go module directory
+      uses: actions/checkout@v2
+
+    - name: Build and Publish latest Docker image
+      uses: VaultVulp/gp-docker-action@1.1.7
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        image-name: prometheus-covid-exporter
