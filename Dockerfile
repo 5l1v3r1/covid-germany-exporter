@@ -1,3 +1,4 @@
+ARG ARCH=""
 FROM golang:alpine
 
 # Create application directory
@@ -6,7 +7,7 @@ ADD . /app/
 WORKDIR /app
 
 # Build the application
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o run .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=${ARCH} go build -o run .
 
 # Add the execution user
 RUN adduser -S -D -H -h /app execuser
