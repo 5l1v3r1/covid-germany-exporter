@@ -24,6 +24,6 @@ jobs:
         run: |
           docker buildx build \
             --push \
-            --plattform linux/arm64/v8,linux/amd64 \
+            --platform linux/arm64/v8,linux/amd64 \
             --tag docker.pkg.github.com/noizeme/prometheus-covid-exporter/prometheus-covid-exporter:latest \
             .
