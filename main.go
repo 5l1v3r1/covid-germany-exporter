@@ -133,8 +133,12 @@ func main() {
 	registry.MustRegister(
 		diseaseCases,
 		diseaseDeaths,
+		diseaseCasePreviousDayChange,
+		diseaseCasesPerHundredThousand,
+		diseaseSevenDayCasesPerHundredThousand,
 		vaccinationTotal,
 		vaccinationVaccinated,
+		vaccinationQuote,
 	)
 
 	http.Handle("/metrics", promhttp.HandlerFor(registry, promhttp.HandlerOpts{}))
