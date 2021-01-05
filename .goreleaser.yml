@@ -1,0 +1,43 @@
+before:
+  hooks:
+    - go mod download
+
+builds:
+  - id: "prometheus-covid-exporter-cli"
+    main: ./main.go
+    binary: prometheus-covid-exporter
+    env:
+      - CGO_ENABLED=0
+      - GO111MODULE=on
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - 386
+      - amd64
+      - arm
+      - arm64
+
+archives:
+  - name_template: "prometheus-covid-exporter-{{ .Version }}-{{ .Os }}-{{ .Arch }}"
+    format_overrides:
+      - goos: windows
+        format: zip
+
+source:
+  enabled: true
+  name_template: "prometheus-covid-exporter-{{ .Version }}.src"
+
+checksum:
+  name_template: "prometheus-covid-exporter-{{ .Version }}.checksums.txt"
+
+milestones:
+  - close: true
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
