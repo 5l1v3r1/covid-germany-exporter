@@ -17,7 +17,7 @@ const (
 	defaultPort = 8080
 
 	defaultInitialDelay = 0 * time.Second
-	defaultRefreshDelay = 2 * time.Minute
+	defaultRefreshDelay = 5 * time.Minute
 )
 
 var (
@@ -46,6 +46,12 @@ var (
 		Name:      "vaccinated",
 		Help:      "The number of people that are already vaccinated",
 	}, []string{"state"})
+	vaccinationQuote = prometheus.NewGaugeVec(prometheus.GaugeOpts{
+		Namespace: "covid",
+		Subsystem: "vaccination",
+		Name:      "quote",
+		Help:      "The quote of people that have been vaccinated",
+	}, []string{"state"})
 )
 
 func refreshDiseaseData() {
@@ -73,10 +79,12 @@ func refreshVaccinationData() {
 
 	vaccinationTotal.WithLabelValues("Germany").Set(float64(vaccinationData.Total))
 	vaccinationVaccinated.WithLabelValues("Germany").Set(float64(vaccinationData.Vaccinated))
+	vaccinationQuote.WithLabelValues("Germany").Set(vaccinationData.Quote)
 
 	for state, data := range vaccinationData.States {
 		vaccinationTotal.WithLabelValues(state).Set(float64(data.Total))
 		vaccinationVaccinated.WithLabelValues(state).Set(float64(data.Vaccinated))
+		vaccinationQuote.WithLabelValues(state).Set(data.Quote)
 	}
 }
 
