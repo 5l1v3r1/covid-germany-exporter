@@ -39,6 +39,9 @@ jobs:
         with:
           images: noizeme/prometheus-covid-exporter
           tag-sha: true
+          tag-semver: |
+            {{version}}
+            {{major}}.{{minor}}
 
       - name: Set up Docker Buildx
         id: buildx
