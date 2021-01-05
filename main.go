@@ -33,6 +33,24 @@ var (
 		Name:      "deaths",
 		Help:      "The number of deaths in relation with COVID in Germany",
 	}, []string{"state"})
+	diseaseCasePreviousDayChange = prometheus.NewGaugeVec(prometheus.GaugeOpts{
+		Namespace: "covid",
+		Subsystem: "disease",
+		Name:      "case_previous_day_change",
+		Help:      "The number of new cases since the previous day",
+	}, []string{"state"})
+	diseaseCasesPerHundredThousand = prometheus.NewGaugeVec(prometheus.GaugeOpts{
+		Namespace: "covid",
+		Subsystem: "disease",
+		Name:      "cases_per_hundred_thousand",
+		Help:      "The number of cases per 10,000 inhabitants",
+	}, []string{"state"})
+	diseaseSevenDayCasesPerHundredThousand = prometheus.NewGaugeVec(prometheus.GaugeOpts{
+		Namespace: "covid",
+		Subsystem: "disease",
+		Name:      "seven_day_cases_per_hundred_thousand",
+		Help:      "The number of new cases in the last week per 10,000 inhabitants",
+	}, []string{"state"})
 
 	vaccinationTotal = prometheus.NewGaugeVec(prometheus.GaugeOpts{
 		Namespace: "covid",
@@ -68,6 +86,9 @@ func refreshDiseaseData() {
 
 		diseaseCases.WithLabelValues(province).Set(float64(data.Cases))
 		diseaseDeaths.WithLabelValues(province).Set(float64(data.Deaths))
+		diseaseCasePreviousDayChange.WithLabelValues(province).Set(float64(data.CasePreviousDayChange))
+		diseaseCasesPerHundredThousand.WithLabelValues(province).Set(float64(data.CasesPerHundredThousand))
+		diseaseSevenDayCasesPerHundredThousand.WithLabelValues(province).Set(float64(data.SevenDayCasesPerHundredThousand))
 	}
 }
 
