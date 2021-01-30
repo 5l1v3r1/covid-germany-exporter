@@ -1,5 +1,9 @@
 # Prometheus COVID-19 Exporter
 
+[![Build Status](https://img.shields.io/github/workflow/status/jangraefen/prometheus-covid-exporter/Build?logo=GitHub)](https://github.com/jangraefen/prometheus-covid-exporter/actions?query=workflow:Build)
+[![PkgGoDev](https://pkg.go.dev/badge/mod/github.com/jangraefen/prometheus-covid-exporter)](https://pkg.go.dev/mod/github.com/jangraefen/prometheus-covid-exporter)
+[![Go Report Card](https://goreportcard.com/badge/github.com/jangraefen/prometheus-covid-exporter)](https://goreportcard.com/report/github.com/jangraefen/prometheus-covid-exporter)
+
 A metric exporter for Prometheus that scraps [disease.sh](https://disease.sh) and
 the [RKI Vaccination Data](https://rki-vaccination-data.vercel.app) APIs for new data. By default, data is retrieved
 every five minutes. Usually data is only updated once a day, so the fetching interval can be overwritten by passing a
