@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	diseaseApiUrl      = "https://disease.sh/v3/covid-19"
+	diseaseAPIURL      = "https://disease.sh/v3/covid-19"
 	allowNullParameter = "allowNull"
 )
 
@@ -38,7 +38,7 @@ func GetGovernmentData(country string, allowNull bool) ([]GovernmentDiseaseData,
 	response, err := resty.New().
 		SetHeader("accept", "application/json").
 		SetQueryParam(allowNullParameter, strconv.FormatBool(allowNull)).
-		SetHostURL(diseaseApiUrl).
+		SetHostURL(diseaseAPIURL).
 		R().
 		Get(fmt.Sprintf("/gov/%s", country))
 	if err != nil {

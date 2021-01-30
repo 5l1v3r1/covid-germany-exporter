@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	rkiVaccinationDataApi = "https://rki-vaccination-data.vercel.app"
+	rkiVaccinationDataAPIURL = "https://rki-vaccination-data.vercel.app"
 )
 
 // VaccinationData is a struct that is JSON-compatible with the RKI vaccination data API.
@@ -49,7 +49,7 @@ type VaccinationCountData struct {
 func GetVaccinationData() (*VaccinationData, error) {
 	response, err := resty.New().
 		SetHeader("accept", "application/json").
-		SetHostURL(rkiVaccinationDataApi).
+		SetHostURL(rkiVaccinationDataAPIURL).
 		R().
 		Get("/api")
 	if err != nil {
