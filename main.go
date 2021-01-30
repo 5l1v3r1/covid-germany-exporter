@@ -58,17 +58,41 @@ var (
 		Name:      "total",
 		Help:      "The number of people that need to get vaccinated in total",
 	}, []string{"state"})
+	vaccinationQuote = prometheus.NewGaugeVec(prometheus.GaugeOpts{
+		Namespace: "covid",
+		Subsystem: "vaccination",
+		Name:      "quote",
+		Help:      "The quote of people that have been vaccinated",
+	}, []string{"state"})
+	vaccinationPer1000Inhabitants = prometheus.NewGaugeVec(prometheus.GaugeOpts{
+		Namespace: "covid",
+		Subsystem: "vaccination",
+		Name:      "per_1000_inhabitants",
+		Help:      "The number of vaccinations per 1000 citizens",
+	}, []string{"state"})
 	vaccinationVaccinated = prometheus.NewGaugeVec(prometheus.GaugeOpts{
 		Namespace: "covid",
 		Subsystem: "vaccination",
 		Name:      "vaccinated",
 		Help:      "The number of people that are already vaccinated",
 	}, []string{"state"})
-	vaccinationQuote = prometheus.NewGaugeVec(prometheus.GaugeOpts{
+	vaccinationDifferenceToPreviousDay = prometheus.NewGaugeVec(prometheus.GaugeOpts{
 		Namespace: "covid",
 		Subsystem: "vaccination",
-		Name:      "quote",
-		Help:      "The quote of people that have been vaccinated",
+		Name:      "difference_to_previous_day",
+		Help:      "The number of vaccinations performed during the last 24h period",
+	}, []string{"state"})
+	vaccinationVaccinatedSecondWave = prometheus.NewGaugeVec(prometheus.GaugeOpts{
+		Namespace: "covid",
+		Subsystem: "vaccination",
+		Name:      "second_wave_vaccinated",
+		Help:      "The number of people that are already vaccinated during the 2nd wave",
+	}, []string{"state"})
+	vaccinationDifferenceToPreviousDaySecondWave = prometheus.NewGaugeVec(prometheus.GaugeOpts{
+		Namespace: "covid",
+		Subsystem: "vaccination",
+		Name:      "second_wave_difference_to_previous_day",
+		Help:      "The number of vaccinations performed during the last 24h period during the 2nd wave",
 	}, []string{"state"})
 )
 
@@ -99,13 +123,23 @@ func refreshVaccinationData() {
 	}
 
 	vaccinationTotal.WithLabelValues("Germany").Set(float64(vaccinationData.Total))
-	vaccinationVaccinated.WithLabelValues("Germany").Set(float64(vaccinationData.Vaccinated))
 	vaccinationQuote.WithLabelValues("Germany").Set(vaccinationData.Quote)
+	vaccinationPer1000Inhabitants.WithLabelValues("Germany").Set(vaccinationData.VaccinationsPer1000Inhabitants)
+
+	vaccinationVaccinated.WithLabelValues("Germany").Set(float64(vaccinationData.Vaccinated))
+	vaccinationDifferenceToPreviousDay.WithLabelValues("Germany").Set(float64(vaccinationData.DifferenceToThePreviousDay))
+	vaccinationVaccinatedSecondWave.WithLabelValues("Germany").Set(float64(vaccinationData.SecondVaccination.Vaccinated))
+	vaccinationDifferenceToPreviousDaySecondWave.WithLabelValues("Germany").Set(float64(vaccinationData.SecondVaccination.DifferenceToThePreviousDay))
 
 	for state, data := range vaccinationData.States {
 		vaccinationTotal.WithLabelValues(state).Set(float64(data.Total))
-		vaccinationVaccinated.WithLabelValues(state).Set(float64(data.Vaccinated))
 		vaccinationQuote.WithLabelValues(state).Set(data.Quote)
+		vaccinationPer1000Inhabitants.WithLabelValues(state).Set(data.VaccinationsPer1000Inhabitants)
+
+		vaccinationVaccinated.WithLabelValues(state).Set(float64(data.Vaccinated))
+		vaccinationDifferenceToPreviousDay.WithLabelValues(state).Set(float64(data.DifferenceToThePreviousDay))
+		vaccinationVaccinatedSecondWave.WithLabelValues(state).Set(float64(data.SecondVaccination.Vaccinated))
+		vaccinationDifferenceToPreviousDaySecondWave.WithLabelValues(state).Set(float64(data.SecondVaccination.DifferenceToThePreviousDay))
 	}
 }
 
