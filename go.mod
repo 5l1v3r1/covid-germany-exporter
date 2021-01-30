@@ -1,4 +1,4 @@
-module github.com/NoizeMe/prometheus-covid-exporter
+module github.com/jangraefen/prometheus-covid-exporter
 
 go 1.15
 

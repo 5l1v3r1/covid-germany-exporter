@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/NoizeMe/prometheus-covid-exporter/covid"
+	"github.com/jangraefen/prometheus-covid-exporter/covid"
 	"github.com/jtaczanowski/go-scheduler"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
