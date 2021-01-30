@@ -19,8 +19,15 @@ command-line argument.
   inhabitants.
 - `covid_vaccination_total{state}`: The number of people that need to get vaccinated. This is basically the number of
   inhabitants for the given state.
-- `covid_vaccination_vaccinated{state}`: The number of people that already have been vaccinated.
 - `covid_vaccination_quote{state}`: The quote of people that already have been vaccinated.
+- `covid_vaccination_per_1000_inhabitants{state}`: The number of vaccinations per 1000 citizens.
+- `covid_vaccination_vaccinated{state}`: The number of people that already have been vaccinated.
+- `covid_vaccination_difference_to_previous_day{state}`: The number of vaccinations performed during the last 24h
+  period.
+- `covid_vaccination_second_wave_vaccinated{state}`: The number of people that are already vaccinated during the 2nd
+  wave.
+- `covid_vaccination_second_wave_difference_to_previous_day{state}`: The number of vaccinations performed during the
+  last 24h period during the 2nd wave.
 
 To get nation-wide data, it is possible to pass `state = "Germany"` to any of the above metrics.
 
