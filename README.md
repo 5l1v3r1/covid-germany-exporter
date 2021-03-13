@@ -3,6 +3,8 @@
 [![Build Status](https://img.shields.io/github/workflow/status/jangraefen/covid-germany-exporter/Build?logo=GitHub)](https://github.com/jangraefen/covid-germany-exporter/actions?query=workflow:Build)
 [![PkgGoDev](https://pkg.go.dev/badge/mod/github.com/jangraefen/covid-germany-exporter)](https://pkg.go.dev/mod/github.com/jangraefen/covid-germany-exporter)
 [![Go Report Card](https://goreportcard.com/badge/github.com/jangraefen/covid-germany-exporter)](https://goreportcard.com/report/github.com/jangraefen/covid-germany-exporter)
+[![Docker Pulls](https://img.shields.io/docker/pulls/jangraefen/covid-germany-exporter)](https://hub.docker.com/r/jangraefen/covid-germany-exporter)
+[![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/covid-germany-exporter)](https://artifacthub.io/packages/search?repo=covid-germany-exporter)
 
 A metric exporter for Prometheus that scraps [disease.sh](https://disease.sh) and
 the [RKI Vaccination Data](https://rki-vaccination-data.vercel.app) APIs for new data. By default, data is retrieved
