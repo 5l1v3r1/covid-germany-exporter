@@ -69,9 +69,9 @@ jobs:
         run: |
           export GO111MODULE=on
           go mod download
-          GOOS=linux   GOARCH=amd64 go build -o bin/prometheus-covid-exporter-linux-amd64       main.go
-          GOOS=linux   GOARCH=arm64 go build -o bin/prometheus-covid-exporter-linux-arm64       main.go
-          GOOS=windows GOARCH=amd64 go build -o bin/prometheus-covid-exporter-windows-amd64.exe main.go
+          GOOS=linux   GOARCH=amd64 go build -o bin/covid-germany-exporter-linux-amd64       main.go
+          GOOS=linux   GOARCH=arm64 go build -o bin/covid-germany-exporter-linux-arm64       main.go
+          GOOS=windows GOARCH=amd64 go build -o bin/covid-germany-exporter-windows-amd64.exe main.go
       - name: Upload Artifacts
         uses: actions/upload-artifact@master
         with:

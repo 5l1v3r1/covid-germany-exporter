@@ -3,9 +3,9 @@ before:
     - go mod download
 
 builds:
-  - id: "prometheus-covid-exporter-cli"
+  - id: "covid-germany-exporter-cli"
     main: ./main.go
-    binary: prometheus-covid-exporter
+    binary: covid-germany-exporter
     env:
       - CGO_ENABLED=0
       - GO111MODULE=on
@@ -19,17 +19,17 @@ builds:
       - arm64
 
 archives:
-  - name_template: "prometheus-covid-exporter-{{ .Version }}-{{ .Os }}-{{ .Arch }}"
+  - name_template: "covid-germany-exporter-{{ .Version }}-{{ .Os }}-{{ .Arch }}"
     format_overrides:
       - goos: windows
         format: zip
 
 source:
   enabled: true
-  name_template: "prometheus-covid-exporter-{{ .Version }}.src"
+  name_template: "covid-germany-exporter-{{ .Version }}.src"
 
 checksum:
-  name_template: "prometheus-covid-exporter-{{ .Version }}.checksums.txt"
+  name_template: "covid-germany-exporter-{{ .Version }}.checksums.txt"
 
 milestones:
   - close: true

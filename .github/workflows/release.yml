@@ -37,7 +37,7 @@ jobs:
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1
         with:
-          images: jangraefen/prometheus-covid-exporter
+          images: jangraefen/covid-germany-exporter
           tag-sha: true
           tag-semver: |
             {{version}}

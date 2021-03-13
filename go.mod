@@ -1,4 +1,4 @@
-module github.com/jangraefen/prometheus-covid-exporter
+module github.com/jangraefen/covid-germany-exporter
 
 go 1.15
 

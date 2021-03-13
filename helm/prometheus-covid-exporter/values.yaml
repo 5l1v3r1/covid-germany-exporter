@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: jangraefen/prometheus-covid-exporter
+  repository: jangraefen/covid-germany-exporter
   pullPolicy: IfNotPresent
   tag: ""
 

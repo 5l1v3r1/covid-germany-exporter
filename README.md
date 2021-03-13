@@ -1,8 +1,8 @@
-# Prometheus COVID-19 Exporter
+# Prometheus COVID-19 Exporter for Germany
 
-[![Build Status](https://img.shields.io/github/workflow/status/jangraefen/prometheus-covid-exporter/Build?logo=GitHub)](https://github.com/jangraefen/prometheus-covid-exporter/actions?query=workflow:Build)
-[![PkgGoDev](https://pkg.go.dev/badge/mod/github.com/jangraefen/prometheus-covid-exporter)](https://pkg.go.dev/mod/github.com/jangraefen/prometheus-covid-exporter)
-[![Go Report Card](https://goreportcard.com/badge/github.com/jangraefen/prometheus-covid-exporter)](https://goreportcard.com/report/github.com/jangraefen/prometheus-covid-exporter)
+[![Build Status](https://img.shields.io/github/workflow/status/jangraefen/covid-germany-exporter/Build?logo=GitHub)](https://github.com/jangraefen/covid-germany-exporter/actions?query=workflow:Build)
+[![PkgGoDev](https://pkg.go.dev/badge/mod/github.com/jangraefen/covid-germany-exporter)](https://pkg.go.dev/mod/github.com/jangraefen/covid-germany-exporter)
+[![Go Report Card](https://goreportcard.com/badge/github.com/jangraefen/covid-germany-exporter)](https://goreportcard.com/report/github.com/jangraefen/covid-germany-exporter)
 
 A metric exporter for Prometheus that scraps [disease.sh](https://disease.sh) and
 the [RKI Vaccination Data](https://rki-vaccination-data.vercel.app) APIs for new data. By default, data is retrieved

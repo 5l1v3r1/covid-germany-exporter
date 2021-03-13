@@ -3,14 +3,15 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/jangraefen/prometheus-covid-exporter/covid"
-	"github.com/jtaczanowski/go-scheduler"
-	"github.com/prometheus/client_golang/prometheus"
-	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"log"
 	"net/http"
 	"strings"
 	"time"
+
+	"github.com/jangraefen/covid-germany-exporter/covid"
+	"github.com/jtaczanowski/go-scheduler"
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 const (
