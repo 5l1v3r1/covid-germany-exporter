@@ -3,6 +3,16 @@ entries:
   covid-germany-exporter:
   - apiVersion: v2
     appVersion: 0.3.0
+    created: "2021-03-13T23:43:10.045983099Z"
+    description: A prometheus exporter that exposes German COVID-19 stats.
+    digest: 357aebacbc7924e7bcebe0a1ea220dceaf1416a3254484eeddfdabb855c14413
+    name: covid-germany-exporter
+    type: application
+    urls:
+    - https://github.com/jangraefen/covid-germany-exporter/releases/download/helm-v0.3.0-r2/covid-germany-exporter-0.3.0-r2.tgz
+    version: 0.3.0-r2
+  - apiVersion: v2
+    appVersion: 0.3.0
     created: "2021-03-13T23:25:44.063287073Z"
     description: A prometheus exporter that exposes German COVID-19 stats.
     digest: c45d7346128a59353ecdae2dfec9074265362a8995ff7b7f0a057ce1e66ffca9
@@ -22,4 +32,4 @@ entries:
     urls:
     - https://github.com/jangraefen/prometheus-covid-exporter/releases/download/helm-v0.2.1-r1/prometheus-covid-exporter-0.2.1-r1.tgz
     version: 0.2.1-r1
-generated: "2021-03-13T23:25:44.063601791Z"
+generated: "2021-03-13T23:43:10.045994799Z"
