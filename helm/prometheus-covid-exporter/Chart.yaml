@@ -4,6 +4,5 @@ description: A prometheus exporter that exposes German COVID-19 stats.
 
 type: application
 
-version: 0.2.1-r
-
+version: 0.2.1-r1
 appVersion: 0.2.1
