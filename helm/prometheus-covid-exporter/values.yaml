@@ -1,0 +1,37 @@
+replicaCount: 1
+
+image:
+  repository: jangraefen/prometheus-covid-exporter
+  pullPolicy: IfNotPresent
+  tag: ""
+
+imagePullSecrets: [ ]
+nameOverride: ""
+fullnameOverride: ""
+
+podAnnotations: { }
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  enabled: false
+  annotations: { }
+  hosts:
+    - host: chart-example.local
+  tls: [ ]
+
+serviceMonitor:
+  create: false
+  interval:
+  labels:
+  scrapeTimeout:
+
+resources: { }
+
+nodeSelector: { }
+
+tolerations: [ ]
+
+affinity: { }

@@ -1,0 +1,9 @@
+apiVersion: v2
+name: prometheus-covid-exporter
+description: A prometheus exporter that exposes German COVID-19 stats.
+
+type: application
+
+version: 0.2.1-r
+
+appVersion: 0.2.1
